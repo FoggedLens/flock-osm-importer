@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 ### 4. Run the script
 
-> **WARNING**: Before running in production, please test this script in the OSM dev environment. To do so, run `export ENV=dev` before running the script.
+> **WARNING**: Before running in production, please test this script in the OSM dev environment. To do so, you'll need to repeat [Step 1](#1-register-a-client-application-with-osm) on the [development site](https://master.apis.dev.openstreetmap.org/oauth2/applications), and then run `export ENV=dev` before running the script.
 
 ```bash
 python3 import.py "<flock-planner-url>"
