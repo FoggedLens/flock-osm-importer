@@ -61,7 +61,7 @@ def detect_duplicates(nodes):
         conflicting_node_ids.add(alpr['id'])
         conflicting_imported_names.add(node['name'])
 
-  print(f"\033[1m\033[91mFound {len(conflicting_node_ids)} conflicting nodes in OSM.\033[0m")
+  print(f"\033[1m\033[91mFound {len(conflicting_imported_names)} conflicts with existing nodes in OSM.\033[0m")
   print(f"Detected as Duplicates:")
   for name in conflicting_imported_names:
     print(f"  - {name}")
@@ -69,4 +69,4 @@ def detect_duplicates(nodes):
   input("\033[1mPress Enter to view potential duplicates in OSM...\033[0m")
   webbrowser.open(get_overpass_turbo_link(conflicting_node_ids))
 
-  return conflicting_node_ids
+  return conflicting_node_ids, conflicting_imported_names

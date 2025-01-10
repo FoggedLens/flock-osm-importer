@@ -75,12 +75,27 @@ if (__name__ == "__main__"):
       "status": camera['status'],
     })
 
-  dupes = overpass.detect_duplicates(alpr_nodes)
+  dupes, dupe_names = overpass.detect_duplicates(alpr_nodes)
 
   if len(dupes) > 0:
-    cont = input("\033[1mOnce you've confirmed there are no duplicates, do you want to continue? [y/N]:\033[0m ")
-    if cont.lower() != 'y':
-      print("User did not approve. Exiting.")
+    print("\nOptions:")
+    print("1. Cancel (default)")
+    print("2. Upload non-duplicates")
+    print("3. Force upload all nodes")
+
+    choice = input("\033[1mChoose an option [1/2/3]:\033[0m ").strip()
+    if choice == '2':
+      # filter out duplicates
+      alpr_nodes = [node for node in alpr_nodes if node['name'] not in dupe_names]
+      if len(alpr_nodes) == 0:
+        print("No non-duplicate nodes to upload. Exiting.")
+        sys.exit(1)
+      else:
+        print(f"Filtered out {len(dupe_names)} duplicate nodes. Uploading {len(alpr_nodes)} nodes.")
+    elif choice == '3':
+      pass
+    else:
+      print("User chose to cancel. Exiting.")
       sys.exit(1)
 
   cs = OSMChangeset(dev_mode=is_dev)
