@@ -1,8 +1,8 @@
 # Flock OSM Importer
 
-![Flock Planning Center](./docs:/planning-center.webp)
-
 This simple script is used to import Flock Planning Center data into the OSM database.
+
+![Flock Planning Center](./docs/planning-center.webp)
 
 ### What is Flock Planning Center
 Flock Planning Center is a webpage given to Flock's customers for managing their deployment. It includes detailed information about the devices, their status, and their locations.
@@ -17,9 +17,9 @@ https://planner.flocksafety.com/public/SOME-LONG-UUID
 
 The UUID is unique to each customer.
 
-### How to Use
+## How to Use
 
-#### 1. Register a Client Application with OSM
+### 1. Register a Client Application with OSM
 
 1. Go to [My Client Applications](https://www.openstreetmap.org/oauth2/applications) in OSM.
 2. Click on `Register a new application`.
@@ -32,13 +32,13 @@ The UUID is unique to each customer.
 4. Click on `Register`. Make note of the `Client ID` and `Client Secret`. The secret will only be shown once.
 5. Rename `.env.example` to `.env`, and paste in the `Client ID` and `Client Secret`.
 
-#### 2. Clone the repository
+### 2. Clone the repository
 
 ```bash
 git clone https://github.com/frillweeman/flock-osm-importer
 ```
 
-#### 3. Install the requirements
+### 3. Install the requirements
 
 ```bash
 cd flock-osm-importer
@@ -46,7 +46,7 @@ cd flock-osm-importer
 pip install -r requirements.txt
 ```
 
-#### 4. Run the script
+### 4. Run the script
 
 > **WARNING**: Before running in production, please test this script in the OSM dev environment. To do so, run `export ENV=dev` before running the script.
 
@@ -58,7 +58,7 @@ The script will open a browser window asking you to authorize the application. A
 
 When the changeset is created, the script will open the changeset in a browser window. You can then review the changes and submit them to OSM by responding `Y` to the prompt.
 
-##### Sample Output
+#### Sample Output
 ```bash
 $ python3 import.py "https://planner.flocksafety.com/public/xxx-yyy-zzz"
 Running in dev environment
