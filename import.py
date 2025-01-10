@@ -4,6 +4,7 @@ import re
 import os
 import json
 from osm_changeset import OSMChangeset
+import overpass
 import webbrowser
 
 def get_flock_camera_details(agency_uuid, use_cache=False):
@@ -51,7 +52,7 @@ if (__name__ == "__main__"):
   print(f"Running in {'dev' if is_dev else 'prod'} environment")
 
   if not is_dev:
-    ack = input("WARNING: This script will make changes to OSM. Are you sure you want to continue? [y/N]: ")
+    ack = input("\033[1mWARNING: This script will make changes to OSM. Are you sure you want to continue? [y/N]:\033[0m ")
     if ack.lower() != 'y':
       print("User did not approve. Exiting.")
       sys.exit(1)
@@ -74,7 +75,13 @@ if (__name__ == "__main__"):
       "status": camera['status'],
     })
 
-  # print(json.dumps(alpr_nodes, indent=2))
+  dupes = overpass.detect_duplicates(alpr_nodes)
+
+  if len(dupes) > 0:
+    cont = input("\033[1mOnce you've confirmed there are no duplicates, do you want to continue? [y/N]:\033[0m ")
+    if cont.lower() != 'y':
+      print("User did not approve. Exiting.")
+      sys.exit(1)
 
   cs = OSMChangeset(dev_mode=is_dev)
 
@@ -85,11 +92,11 @@ if (__name__ == "__main__"):
 
   cs.upload_nodes(changeset_id, alpr_nodes)
 
-  input("Please review changes before submitting. Press Enter to open changeset in browser.")
+  input("\033[1mPlease review changes before submitting. Press Enter to open changeset in browser.\033[0m")
   changeset_url = f"{cs.OSM_API_BASE_URL}/browse/changeset/{changeset_id}"
   webbrowser.open(changeset_url)
 
-  does_approve = input("Do you approve these changes? [y/N]: ")
+  does_approve = input("\033[1mDo you approve these changes? [y/N]:\033[0m ")
 
   if does_approve.lower() == 'y':
     cs.close_changeset(changeset_id)
