@@ -55,8 +55,8 @@ def detect_duplicates(nodes):
   for node in nodes:
     for alpr in alprs:
       if (
-        abs(node['lat'] - alpr['lat']) < 0.0001 and
-        abs(node['lng'] - alpr['lon']) < 0.0001
+        abs(node['lat'] - alpr['lat']) < 0.0002 and
+        abs(node['lng'] - alpr['lon']) < 0.0002
       ):
         conflicting_node_ids.add(alpr['id'])
         conflicting_imported_names.add(node['name'])
