@@ -75,7 +75,7 @@ if (__name__ == "__main__"):
       "status": camera['status'],
     })
 
-  dupes, dupe_names = overpass.detect_duplicates(alpr_nodes)
+  dupes, dupe_names = overpass.detect_duplicates(alpr_nodes, os.environ.get('DUPLICATE_RADIUS') or 0.0002)
 
   if len(dupes) > 0:
     print("\nOptions:")

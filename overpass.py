@@ -45,7 +45,7 @@ def get_alprs_in_bounding_box(bbox):
   """
   return overpass_request(query)
 
-def detect_duplicates(nodes):
+def detect_duplicates(nodes, radius):
   conflicting_node_ids = set()
   conflicting_imported_names = set()
 
@@ -55,8 +55,8 @@ def detect_duplicates(nodes):
   for node in nodes:
     for alpr in alprs:
       if (
-        abs(node['lat'] - alpr['lat']) < 0.0002 and
-        abs(node['lng'] - alpr['lon']) < 0.0002
+        abs(node['lat'] - alpr['lat']) < radius and
+        abs(node['lng'] - alpr['lon']) < radius
       ):
         conflicting_node_ids.add(alpr['id'])
         conflicting_imported_names.add(node['name'])
