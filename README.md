@@ -42,6 +42,7 @@ git clone https://github.com/frillweeman/flock-osm-importer
 
 ```bash
 cd flock-osm-importer
+python3 -m venv .venv
 . ./.venv/bin/activate
 pip install -r requirements.txt
 ```
