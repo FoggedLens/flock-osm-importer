@@ -19,7 +19,13 @@ The UUID is unique to each customer.
 
 ## How to Use
 
-### 1. Register a Client Application with OSM
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/frillweeman/flock-osm-importer
+```
+
+### 2. Register a Client Application with OSM
 
 1. Go to [My Client Applications](https://www.openstreetmap.org/oauth2/applications) in OSM.
 2. Click on `Register a new application`.
@@ -32,12 +38,6 @@ The UUID is unique to each customer.
 4. Click on `Register`. Make note of the `Client ID` and `Client Secret`. The secret will only be shown once.
 5. Rename `.env.example` to `.env`, and paste in the `Client ID` and `Client Secret`.
 
-### 2. Clone the repository
-
-```bash
-git clone https://github.com/frillweeman/flock-osm-importer
-```
-
 ### 3. Install the requirements
 
 ```bash
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 ### 4. Run the script
 
-> **WARNING**: Before running in production, please test this script in the OSM dev environment. To do so, you'll need to repeat [Step 1](#1-register-a-client-application-with-osm) on the [development site](https://master.apis.dev.openstreetmap.org/oauth2/applications), and then run `export ENV=dev` before running the script.
+> **WARNING**: Before running in production, please test this script in the OSM dev environment. To do so, you'll need to repeat [Step 2](#2-register-a-client-application-with-osm) on the [development site](https://master.apis.dev.openstreetmap.org/oauth2/applications), and then run `export ENV=dev` before running the script.
 
 ```bash
 python3 import.py "<flock-planner-url>"

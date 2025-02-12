@@ -9,7 +9,7 @@ import json
 class OSMChangeset:
   def __init__(self, dev_mode=False):
     load_dotenv()
-    self.OSM_API_BASE_URL = "https://master.apis.dev.openstreetmap.org" if dev_mode else "https://api.openstreetmap.org"
+    self.OSM_API_BASE_URL = "https://master.apis.dev.openstreetmap.org" if dev_mode else "https://www.openstreetmap.org"
     self.CLIENT_ID = os.getenv("CLIENT_ID")
     self.CLIENT_SECRET = os.getenv("CLIENT_SECRET")
     self.REDIRECT_URI = "https://cdn.deflock.me/echo.html"
@@ -39,6 +39,7 @@ class OSMChangeset:
     authorization_response = input("Paste the authorization code here: ")
     token = oauth.fetch_token(
       self.TOKEN_URL,
+      include_client_id=True,
       client_secret=self.CLIENT_SECRET,
       code=authorization_response,
     )
