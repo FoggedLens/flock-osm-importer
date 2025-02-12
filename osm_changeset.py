@@ -87,8 +87,12 @@ class OSMChangeset:
         "surveillance:zone": "traffic",
         "manufacturer": "Flock Safety",
         "manufacturer:wikidata": "Q108485435",
-        "direction": str(alpr["direction"]),
       }
+
+      # sometimes direction can be undefined on the beefeater response
+      if alpr["direction"] is not None:
+        tags["direction"] = str(alpr["direction"])
+
       # TODO: add operator from Flock Safety API
       node = ET.SubElement(create, "node", id=str(node_id), lat=str(lat), lon=str(lon), changeset=str(changeset_id))
       node_id -= 1  # Decrement the ID for the next new node

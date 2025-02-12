@@ -71,7 +71,7 @@ if (__name__ == "__main__"):
       "name": camera['name'],
       "lat": camera['lat'],
       "lng": camera['lng'],
-      "direction": convert_to_north_reference(camera['rotationAngle']),
+      "direction": convert_to_north_reference(camera['rotationAngle']) if 'rotationAngle' in camera else None,
       "status": camera['status'],
     })
 
